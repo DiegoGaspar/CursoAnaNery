@@ -1,0 +1,17 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block main %}
+<div class="row">
+    <div class="col">
+        <h1>Carburn</h1>
+        <span>Gerenciando seu Estacionamento</span>
+    </div>
+    <div class="col">
+        <img src="{% static 'img/logo.jpg' %}" alt="Carburn">
+    </div>
+</div>
+
+{% include 'website/menu.html' %}
+
+{% endblock %}

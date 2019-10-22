@@ -1,0 +1,70 @@
+{% extends 'base.html'%}
+{% load bootstrap %}
+
+{% block menu %}
+    <ul class="nav nav-pills">
+            <li class="nav-item">
+            <a class="nav-link " href="{% url 'core_home'%}">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Serviços</a>
+            <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{%url 'core_lista_pessoas' %}">Pessoas</a>
+                    <a class="dropdown-item" href="{% url 'core_lista_veiculos'%}">Veículos</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{%url 'core_lista_movrotativos'%}">Mov Rotativos</a>
+                    <a class="dropdown-item" href="{% url 'core_lista_mensalistas'%}">Mensalistas</a>
+                    <a class="dropdown-item active" href="{% url 'core_lista_movmensalistas'%}">Mov Mensalistas</a>
+                </div>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Log-out</a>
+
+    </ul>
+{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-12">
+        <h2>Lista de MOVIMENTO Mensalistas</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-ms-6">
+            <table class="table">
+                    <h2>Lista de Mensalistas</h2> 
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Mensalista</th>
+                        <th scope="col">Data de Pagamento</th>
+                        <th scope="col">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for mls in movmensalistas %}  
+                      <tr>
+                        <th scope"row"><a href="{% url 'core_movmensalista_update' mls.id %}">{{mls.id}}</a></th>
+                        <td>{{mls.mensalista}}</td>
+                        <td>{{mls.dt_pgto}}</td>
+                        <td>R$ {{mls.total}}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+            </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-ms-6">
+        <form action="{% url   'core_movmensalista_novo'  %}" method="POST">
+            {% csrf_token %}
+            
+            {{form|bootstrap}}
+
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
