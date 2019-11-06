@@ -20,11 +20,14 @@ pessoa_delete,
 veiculo_delete,
 movrotativos_delete,
 mensalista_delete,
-movmensalista_delete
+movmensalista_delete,
+confirmacao_cadastro,
 )
 
 urlpatterns = [
     url(r'^$', home, name='core_home'),
+    url(r'^confirmacao/$', confirmacao_cadastro, name='core_confirmacao_cadastro'),
+
 
     #URL Pessoa
     url(r'^pessoas/$', lista_pessoas, name='core_lista_pessoas'),

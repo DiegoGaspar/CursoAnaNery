@@ -1,59 +1,84 @@
 {% extends 'base.html'%}
 
 {% block menu %}
-    <ul class="nav nav-pills">
+{% include 'menu.html'%}
+<div class="row">
+    <div class="col-12">
+        <ul class="nav nav-pills">
             <li class="nav-item">
-            <a class="nav-link " href="{% url 'core_home'%}">Home</a>
+               <a class="nav-link" href="{% url 'core_home'%}">Home</a>
             </li>
             <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Serviços</a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="{%url 'core_lista_pessoas' %}">Pessoas</a>
-                <a class="dropdown-item" href="{% url 'core_lista_veiculos'%}">Veículos</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item active" href="{%url 'core_lista_movrotativos'%}">Mov Rotativos</a>
-                <a class="dropdown-item" href="{% url 'core_lista_mensalistas'%}">Mensalistas</a>
-                <a class="dropdown-item" href="{% url 'core_lista_movmensalistas'%}">Mov Mensalistas</a>
-            </div>
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Pessoa</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{%url 'core_lista_pessoas' %}">Lista de Pessoas</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'core_pessoa_nova'%}">Cadastro de Pessoas</a>
+                </div>
             </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Log-out</a>
-
-    </ul>
+            <li class="nav-item dropdown">    
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Veículo</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{%url 'core_lista_veiculos' %}">Lista de Veiculo</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'core_veiculo_novo'%}">Cadastro de Veiculo</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Rotativo</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item active" href="{%url 'core_lista_movrotativos' %}">Lista Movimento Rotativo</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'core_movrotativos_novo'%}">Cadastro de Movimentos Rotativos</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Mensalista</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{%url 'core_lista_mensalistas' %}">Lista dos Mensalistas</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'core_mensalista_novo'%}">Cadastro de Mensalistas</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Movimento Mensalistas</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{%url 'core_lista_movmensalistas' %}">Lista de Movimento Mensalista</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'core_movmensalista_novo'%}">Cadastro de Movimento Mensalista</a>
+                </div>
+            </li>
+          
+    </div>
+</div>   
 {% endblock %}
 
 {% block main %}
 
-
-<table class="table">
-        <h2>Lista de Veiculos Rotativos</h2> 
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Placa</th>
-            <th scope="col">Entrada</th>
-            <th scope="col">Saida</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for mov_rot in mov_rot %}  
-          <tr>
-            <th scope"row"><a href="{% url 'core_movrotativos_update' mov_rot.id %}">{{mov_rot.id}}</a></th>
-            <td>{{mov_rot.veiculo}}</td>
-            <td>{{mov_rot.entrada}}</td>
-            <td>{{mov_rot.saida}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-</table>
-
-<form action="{% url   'core_movrotativos_novo'  %}" method="POST">
-    {% csrf_token %}
-    
-    {{form.as_p}}
-
-    <button type="submit">Cadastrar</button>
-
-</form>
+<div class="row">
+    <div class="col-12">
+        <table class="table">
+                <h2>Lista de Veiculos Rotativos</h2> 
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Placa</th>
+                    <th scope="col">Entrada</th>
+                    <th scope="col">Saida</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for mov_rot in mov_rot %}  
+                <tr>
+                    <th scope"row"><a href="{% url 'core_movrotativos_update' mov_rot.id %}">{{mov_rot.id}}</a></th>
+                    <td>{{mov_rot.veiculo}}</td>
+                    <td>{{mov_rot.entrada}}</td>
+                    <td>{{mov_rot.saida}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+        </table>
+    </div>
+</div>
 
 {%endblock%}

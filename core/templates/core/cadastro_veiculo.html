@@ -18,11 +18,11 @@
                 </div>
             </li>
             <li class="nav-item dropdown">    
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Veículo</a>
+                <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Veículo</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{%url 'core_lista_veiculos' %}">Lista de Veiculo</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'core_veiculo_novo'%}">Cadastro de Veiculo</a>
+                    <a class="dropdown-item active" href="{% url 'core_veiculo_novo'%}">Cadastro de Veiculo</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -42,47 +42,28 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Movimento Mensalistas</a>
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Movimento Mensalistas</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item active" href="{%url 'core_lista_movmensalistas' %}">Lista de Movimento Mensalista</a>
+                    <a class="dropdown-item" href="{%url 'core_lista_movmensalistas' %}">Lista de Movimento Mensalista</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'core_movmensalista_novo'%}">Cadastro de Movimento Mensalista</a>
                 </div>
             </li>
-            
     </div>
 </div>   
 {% endblock %}
 
 {% block main %}
 <div class="row">
-    <div class="col-12">
-        <h2>Lista de MOVIMENTO Mensalistas</h2>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-            <table class="table">
-                    <thead class="thead-dark">
-                      <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Mensalista</th>
-                        <th scope="col">Data de Pagamento</th>
-                        <th scope="col">Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for mls in movmensalistas %}  
-                      <tr>
-                        <th scope"row"><a href="{% url 'core_movmensalista_update' mls.id %}">{{mls.id}}</a></th>
-                        <td>{{mls.mensalista}}</td>
-                        <td>{{mls.dt_pgto}}</td>
-                        <td>R$ {{mls.total}}</td>
-                      </tr>
-                      {% endfor %}
-                    </tbody>
-            </table>
-    </div>
+  <div class="col-12">
+    <form action="{% url   'core_veiculo_novo'  %}" method="POST">
+        {% csrf_token %}
+        
+        {{form|bootstrap}}
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+  </div>
 </div>
 
 {% endblock %}
